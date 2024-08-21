@@ -9,20 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
-    @GetMapping("/products")
+    @GetMapping
     public List<ProductModel> getAll() {
         return productService.getAllProducts();
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<?> save(@RequestBody ProductModel product) {
         return productService.saveProduct(product);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProductModel productModel) {
+        return productService.updateProduct(id, productModel);
     }
 
 }
