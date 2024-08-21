@@ -1,4 +1,4 @@
-const Form = ({ buttonVisibility, typingEvent, saveProduct }) => {
+const Form = ({ buttonVisibility, typingEvent, saveProduct, productObj }) => {
   return (
     <form action="post">
       <input
@@ -6,12 +6,14 @@ const Form = ({ buttonVisibility, typingEvent, saveProduct }) => {
         name="name"
         className="form-control"
         placeholder="Name"
+        value={productObj.name}
       />
       <input
         onChange={typingEvent}
         name="brand"
         className="form-control"
         placeholder="Brand"
+        value={productObj.brand}
       />
 
       {buttonVisibility ? (

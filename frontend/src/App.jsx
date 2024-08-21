@@ -34,22 +34,25 @@ const App = () => {
     setObjProduct({ ...objProduct, [name]: value });
   };
 
-  const saveProduct = async (e) => {
+  const saveProduct = async () => {
     try {
-      const response = await fetch(api, {
-        method: "post",
-        body: JSON.stringify(objProduct),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      if (objProduct.name !== "" && objProduct.brand !== "") {
+        const response = await fetch(api, {
+          method: "post",
+          body: JSON.stringify(objProduct),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
 
-      const data = await response.json();
+        alert("Product saved");
+        return;
+      }
 
-      console.log(data);
+      alert("Error saving product");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -59,6 +62,7 @@ const App = () => {
         buttonVisibility={buttonVisible}
         typingEvent={onTyping}
         saveProduct={saveProduct}
+        productObj={objProduct}
       />
       <Table products={data} />
     </div>
