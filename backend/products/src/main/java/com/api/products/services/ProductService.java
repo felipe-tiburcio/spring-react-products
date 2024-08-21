@@ -59,4 +59,16 @@ public class ProductService {
 
         return new ResponseEntity<ResponseModel>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public ResponseEntity<?> deleteProduct(Long id) {
+        Optional<ProductModel> product = productRepository.findById(id);
+
+        if (product.isPresent()) {
+            productRepository.delete(product.get());
+
+            return new ResponseEntity<ProductModel>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<ProductModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
