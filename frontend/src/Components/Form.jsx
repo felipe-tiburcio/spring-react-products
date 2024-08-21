@@ -1,6 +1,6 @@
-const Form = ({ buttonVisibility, typingEvent }) => {
+const Form = ({ buttonVisibility, typingEvent, saveProduct }) => {
   return (
-    <form action="">
+    <form action="post">
       <input
         onChange={typingEvent}
         name="name"
@@ -15,7 +15,9 @@ const Form = ({ buttonVisibility, typingEvent }) => {
       />
 
       {buttonVisibility ? (
-        <button className="btn btn-primary">Save</button>
+        <button className="btn btn-primary" onClick={saveProduct}>
+          Save
+        </button>
       ) : (
         <div>
           <button className="btn btn-warning">Edit</button>

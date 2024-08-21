@@ -34,10 +34,32 @@ const App = () => {
     setObjProduct({ ...objProduct, [name]: value });
   };
 
+  const saveProduct = async (e) => {
+    try {
+      const response = await fetch(api, {
+        method: "post",
+        body: JSON.stringify(objProduct),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
-      <p>{JSON.stringify(objProduct)}</p>
-      <Form buttonVisibility={buttonVisible} typingEvent={onTyping} />
+      <Form
+        buttonVisibility={buttonVisible}
+        typingEvent={onTyping}
+        saveProduct={saveProduct}
+      />
       <Table products={data} />
     </div>
   );
