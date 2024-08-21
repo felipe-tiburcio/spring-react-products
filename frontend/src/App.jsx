@@ -8,12 +8,6 @@ const App = () => {
   const [data, setData] = useState([]);
   const api = "http://localhost:8080/products";
 
-  // useEffect(() => {
-  //   fetch(api)
-  //     .then((ret) => ret.json())
-  //     .then((retConv) => setData(retConv));
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,10 +24,9 @@ const App = () => {
 
   return (
     <div>
-      <p>{JSON.stringify(data)}</p>
       <h1>Spring-React App</h1>
       <Form buttonVisibility={buttonVisible} />
-      <Table />
+      <Table products={data} />
     </div>
   );
 };

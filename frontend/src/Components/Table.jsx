@@ -1,9 +1,8 @@
-const Table = () => {
+const Table = ({ products }) => {
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>#</th>
           <th>Name</th>
           <th>Brand</th>
           <th>Select</th>
@@ -11,12 +10,15 @@ const Table = () => {
       </thead>
 
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        {products.map((product, index) => (
+          <tr key={index}>
+            <td>{product.name}</td>
+            <td>{product.brand}</td>
+            <td>
+              <button className="btn btn-success">Select</button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
