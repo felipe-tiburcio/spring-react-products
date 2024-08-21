@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -37,7 +38,7 @@ public class ProductService {
         return new ResponseEntity<ProductModel>(productRepository.save(productModel), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<?> updateProduct(Long id, ProductModel updatedProduct) {
+    public ResponseEntity<?> updateProduct(UUID id, ProductModel updatedProduct) {
         if (
             updatedProduct.getName().isEmpty() || updatedProduct.getBrand().isEmpty()
         ) {
@@ -60,7 +61,7 @@ public class ProductService {
         return new ResponseEntity<ResponseModel>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public ResponseEntity<?> deleteProduct(Long id) {
+    public ResponseEntity<?> deleteProduct(UUID id) {
         Optional<ProductModel> product = productRepository.findById(id);
 
         if (product.isPresent()) {
