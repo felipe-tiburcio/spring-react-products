@@ -4,8 +4,15 @@ import Form from "./Components/Form";
 import Table from "./Components/Table";
 
 const App = () => {
+  const product = {
+    id: "",
+    name: "",
+    brand: "",
+  };
+
   const [buttonVisible, setButtonVisible] = useState(true);
   const [data, setData] = useState([]);
+  const [objProduct, setObjProduct] = useState(product);
   const api = "http://localhost:8080/products";
 
   useEffect(() => {
@@ -22,10 +29,15 @@ const App = () => {
     fetchData();
   }, []);
 
+  const onTyping = (e) => {
+    const { name, value } = e.target;
+    setObjProduct({ ...objProduct, [name]: value });
+  };
+
   return (
     <div>
-      <h1>Spring-React App</h1>
-      <Form buttonVisibility={buttonVisible} />
+      <p>{JSON.stringify(objProduct)}</p>
+      <Form buttonVisibility={buttonVisible} typingEvent={onTyping} />
       <Table products={data} />
     </div>
   );
