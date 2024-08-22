@@ -2,6 +2,7 @@ const Form = ({
   buttonVisibility,
   typingEvent,
   saveProduct,
+  updateProduct,
   productObj,
   cleanForm,
   deleteProduct,
@@ -29,7 +30,9 @@ const Form = ({
         </button>
       ) : (
         <div>
-          <button className="btn btn-warning">Edit</button>
+          <button onClick={updateProduct} className="btn btn-warning">
+            Update
+          </button>
           <button onClick={deleteProduct} className="btn btn-danger">
             Delete
           </button>

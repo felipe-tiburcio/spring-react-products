@@ -38,7 +38,7 @@ const App = () => {
   const saveProduct = async () => {
     try {
       if (objProduct.name !== "" && objProduct.brand !== "") {
-        axios.post(api, objProduct);
+        await axios.post(api, objProduct);
 
         alert("Product Saved");
 
@@ -46,6 +46,22 @@ const App = () => {
       }
 
       alert("Error saving product");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProduct = async () => {
+    try {
+      if (objProduct.name !== "" && objProduct.brand !== "") {
+        axios.put(`${api}/${objProduct.id}`, objProduct);
+
+        alert("Product Updated");
+
+        return;
+      }
+
+      alert("Error updating product");
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +95,7 @@ const App = () => {
         buttonVisibility={saveButtonVisible}
         typingEvent={onTyping}
         saveProduct={saveProduct}
+        updateProduct={updateProduct}
         productObj={objProduct}
         cleanForm={cleanForm}
         deleteProduct={deleteProduct}
