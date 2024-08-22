@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./Components/Form";
 import Table from "./Components/Table";
+import axios from "axios";
 
 const App = () => {
   const product = {
@@ -10,17 +11,17 @@ const App = () => {
     brand: "",
   };
 
-  const [buttonVisible, setButtonVisible] = useState(true);
-  const [data, setData] = useState([]);
+  const [saveButtonVisible, setSaveButtonVisible] = useState(true);
+  const [products, setProducts] = useState([]);
   const [objProduct, setObjProduct] = useState(product);
   const api = "http://localhost:8080/products";
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        const response = await fetch(api);
-        const json = await response.json();
-        setData(json);
+        axios.get(api).then((response) => {
+          setProducts(response.data);
+        });
       } catch (error) {
         console.error(error);
       }
@@ -37,16 +38,10 @@ const App = () => {
   const saveProduct = async () => {
     try {
       if (objProduct.name !== "" && objProduct.brand !== "") {
-        const response = await fetch(api, {
-          method: "post",
-          body: JSON.stringify(objProduct),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
+        axios.post(api, objProduct);
 
-        alert("Product saved");
+        alert("Product Saved");
+
         return;
       }
 
@@ -56,15 +51,20 @@ const App = () => {
     }
   };
 
+  const selectProduct = (index) => {
+    setObjProduct(products[index]);
+    setSaveButtonVisible(false);
+  };
+
   return (
     <div>
       <Form
-        buttonVisibility={buttonVisible}
+        buttonVisibility={saveButtonVisible}
         typingEvent={onTyping}
         saveProduct={saveProduct}
         productObj={objProduct}
       />
-      <Table products={data} />
+      <Table products={products} selectProduct={selectProduct} />
     </div>
   );
 };

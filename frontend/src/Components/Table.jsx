@@ -1,4 +1,4 @@
-const Table = ({ products }) => {
+const Table = ({ products, selectProduct }) => {
   return (
     <table className="table">
       <thead>
@@ -15,7 +15,9 @@ const Table = ({ products }) => {
             <td>{product.name}</td>
             <td>{product.brand}</td>
             <td>
-              <button className="btn btn-success">Select</button>
+              <button className="btn btn-success" onClick={selectProduct}>
+                Select
+              </button>
             </td>
           </tr>
         ))}
