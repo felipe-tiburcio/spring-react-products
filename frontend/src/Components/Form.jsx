@@ -4,6 +4,7 @@ const Form = ({
   saveProduct,
   productObj,
   cleanForm,
+  deleteProduct,
 }) => {
   return (
     <form action="post">
@@ -29,7 +30,9 @@ const Form = ({
       ) : (
         <div>
           <button className="btn btn-warning">Edit</button>
-          <button className="btn btn-danger">Delete</button>
+          <button onClick={deleteProduct} className="btn btn-danger">
+            Delete
+          </button>
           <button onClick={cleanForm} className="btn btn-secondary">
             Cancel
           </button>

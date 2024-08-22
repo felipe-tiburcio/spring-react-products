@@ -51,16 +51,26 @@ const App = () => {
     }
   };
 
-  const cleanForm = (e) => {
-    e.preventDefault();
-
+  const cleanForm = () => {
     setObjProduct(product);
     setSaveButtonVisible(true);
+    window.location.reload();
   };
 
   const selectProduct = (index) => {
     setObjProduct(products[index]);
     setSaveButtonVisible(false);
+  };
+
+  const deleteProduct = async () => {
+    try {
+      axios.delete(`${api}/${objProduct.id}`);
+
+      alert("Product removed");
+      cleanForm();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -71,6 +81,7 @@ const App = () => {
         saveProduct={saveProduct}
         productObj={objProduct}
         cleanForm={cleanForm}
+        deleteProduct={deleteProduct}
       />
       <Table products={products} selectProduct={selectProduct} />
     </div>
