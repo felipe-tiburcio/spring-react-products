@@ -15,7 +15,10 @@ const Table = ({ products, selectProduct }) => {
             <td>{product.name}</td>
             <td>{product.brand}</td>
             <td>
-              <button className="btn btn-success" onClick={selectProduct}>
+              <button
+                className="btn btn-success"
+                onClick={() => selectProduct(index)}
+              >
                 Select
               </button>
             </td>
