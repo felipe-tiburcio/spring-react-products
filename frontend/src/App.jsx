@@ -51,6 +51,13 @@ const App = () => {
     }
   };
 
+  const cleanForm = (e) => {
+    e.preventDefault();
+
+    setObjProduct(product);
+    setSaveButtonVisible(true);
+  };
+
   const selectProduct = (index) => {
     setObjProduct(products[index]);
     setSaveButtonVisible(false);
@@ -63,6 +70,7 @@ const App = () => {
         typingEvent={onTyping}
         saveProduct={saveProduct}
         productObj={objProduct}
+        cleanForm={cleanForm}
       />
       <Table products={products} selectProduct={selectProduct} />
     </div>

@@ -1,4 +1,10 @@
-const Form = ({ buttonVisibility, typingEvent, saveProduct, productObj }) => {
+const Form = ({
+  buttonVisibility,
+  typingEvent,
+  saveProduct,
+  productObj,
+  cleanForm,
+}) => {
   return (
     <form action="post">
       <input
@@ -24,7 +30,9 @@ const Form = ({ buttonVisibility, typingEvent, saveProduct, productObj }) => {
         <div>
           <button className="btn btn-warning">Edit</button>
           <button className="btn btn-danger">Delete</button>
-          <button className="btn btn-secondary">Cancel</button>
+          <button onClick={cleanForm} className="btn btn-secondary">
+            Cancel
+          </button>
         </div>
       )}
     </form>
